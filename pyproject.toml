@@ -1,0 +1,11 @@
+[project]
+name = "cars dataset"
+version = "1.0.0"
+description = "An example dashboard exploring the Cars dataset"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "altair>=5.5.0",
+    "streamlit>=1.50.0",
+    "vega-datasets>=0.9.0",
+]

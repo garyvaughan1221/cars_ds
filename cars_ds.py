@@ -1,4 +1,3 @@
-from datetime import datetime
 import streamlit as st
 import altair as alt
 import vega_datasets
