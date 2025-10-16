@@ -9,6 +9,9 @@ wheels/
 # Virtual environments
 .venv
 
+
+# not sure why these didn't work.  oh well.
+# not a production app anyways...
 notes/
 notes/*
 datafiles/seattle_weather.csv
