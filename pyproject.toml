@@ -1,5 +1,5 @@
 [project]
-name = "cars dataset"
+name = "cars_ds"
 version = "1.0.0"
 description = "An example dashboard exploring the Cars dataset"
 readme = "README.md"
