@@ -24,7 +24,7 @@ st.set_page_config(
 """
 ""
 st.write("The dataset contains information about various cars, including their horsepower, miles per gallon, weight, and year of manufacture.")
-st.write("Use the chart and metrics below to explore the data.")
+st.write("Use the charts and metrics below to explore the data.")
 
 
 ## Line Chart
@@ -71,12 +71,13 @@ with st.container(horizontal=True, gap="small", horizontal_alignment="center", v
     max_mpg = cars_df["Miles_per_Gallon"].max()
     min_hp = cars_df["Horsepower"].min()
     max_hp = cars_df["Horsepower"].max()
+
+    ## CSS styles ##
     css = " style='display: grid;grid-template-columns: 1fr 1fr;width:100%';width:100%;"
-    hdrStyle = "<h3 style='color:#3c5c25;'>"
-    divStyle1 = "<div class='minMax' style='width:100%;display:block;'>"
-    divStyle2 = "<div class='minMax' style='width:100%;display:block;'>"
-
-
+    hdrStyle = "<h3 class='metrics-hdr'>"
+    hdrStyle2 = "<h3 class='chart-hdr'>"
+    divStyle1 = "<div class='minMax'>"
+    divStyle2 = "<div class='minMax'>"
 
     ## Years
     # TODO: revisit-> (note: has to use st.write)
@@ -113,25 +114,59 @@ with st.container(horizontal=True, gap="small", horizontal_alignment="center", v
       st.html('<br/>')
       st.markdown(f"<div{css}>{minTxt} {maxTxt}</div>", unsafe_allow_html=True)
 
+
 ## Altair Charts
 # ##
 with st.container(horizontal=True, gap="small", horizontal_alignment="left", vertical_alignment="top", border=True):
   cols = st.columns(2, gap="small", width="stretch", border=True)
 
   with cols[0]:
-    st.write("### Horsepower vs. Miles per Gallon")
+    st.html(f"{hdrStyle2}Horsepower vs. Miles per Gallon</h3>")
     alt_chart1 = alt.Chart(cars_df).mark_point().encode(
+      alt.X('Miles_per_Gallon', title='Miles per Gallon'),
       y='Horsepower',
-      x='Miles_per_Gallon',
       color='Origin',
-      tooltip=['Name', 'Horsepower', 'Miles_per_Gallon', 'Origin']
+      size='Cylinders',
+      tooltip=['Name', 'Horsepower', 'Miles_per_Gallon', 'Cylinders', 'Origin']
     ).interactive()
     st.altair_chart(alt_chart1, use_container_width=False)
 
   with cols[1]:
-    st.write("### Horsepower vs. Cylinders")
+    st.html(f"{hdrStyle2}Horsepower vs. Cylinders</h3>")
     alt_chart2 = alt.Chart(cars_df).mark_tick().encode(
+        color='Origin:N',
         x='Horsepower:Q',
         y='Cylinders:O'
     )
     st.altair_chart(alt_chart2, use_container_width=False)
+
+with st.container(border=True):
+  st.html(f"{hdrStyle2}Horsepower over the Years</h3>")
+  alt_chart3 = alt.Chart(cars_df).mark_line(point=True).encode(
+      y='Year',
+      x='Horsepower',
+      color='Origin',
+      tooltip=['Name', 'Year', 'Horsepower', 'Origin']
+  ).interactive()
+  st.altair_chart(alt_chart3, use_container_width=True)
+
+with st.container(border=True):
+  st.html(f"{hdrStyle2}Weight vs. Acceleration</h3>")
+  alt_chart4 = alt.Chart(cars_df).mark_circle().encode(
+      alt.X('Weight_in_lbs', title='Weight (lbs)'),
+      alt.Y('Acceleration', title='Acceleration (sec)'),
+      alt.Size('Horsepower', title='Horsepower'),
+      alt.Color('Origin', title='Origin'),
+      tooltip=['Name', 'Weight_in_lbs', 'Acceleration', 'Horsepower', 'Origin'],
+  ).interactive()
+  st.altair_chart(alt_chart4, use_container_width=True)
+
+  with st.container(border=True):
+    st.html(f"{hdrStyle2}Miles per Gallon vs. Displacement</h3>")
+    alt_chart5 = alt.Chart(cars_df).mark_square().encode(
+        alt.X('Miles_per_Gallon', title='Miles per Gallon'),
+        alt.Y('Displacement', title='Displacement (cc)'),
+        alt.Color('Origin', title='Origin'),
+        tooltip=['Name', 'Miles_per_Gallon', 'Displacement', 'Origin']
+    ).interactive()
+    st.altair_chart(alt_chart5, use_container_width=True)

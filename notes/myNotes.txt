@@ -10,13 +10,3 @@ a value that differs by an axis per something
 
 
 
-Name: altair
-Version: 5.5.0
-
-Name: vega-datasets
-Version: 0.9.0
-
-Name: streamlit
-Version: 1.50.0
-
-

@@ -1,7 +1,20 @@
+h3.chart-hdr, h3.metrics-hdr {
+  color: #616f8b;
+  padding: 0;
+}
+h3.chart-hdr {
+  font-size: 1.50rem;
+  margin-top: 0;
+}
+
 .minMax{
   color: #263b6d;
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
 
   b{
     color: #000;
+    color: #3c5c25;
   }
 }
