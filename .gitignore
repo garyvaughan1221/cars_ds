@@ -11,5 +11,6 @@ wheels/
 
 notes/
 notes/*
-datafiles/
+datafiles/seattle_weather.csv
+datafiles/stocks.csv
 notes/myNotes.txt
